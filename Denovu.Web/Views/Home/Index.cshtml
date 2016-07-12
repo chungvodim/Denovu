@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@section scripts{
+    <script src="~/Scripts/app.js"></script>
+}
+<hr />
+<div id="formFilter" class="form-horizontal">
+    <div>
+        Long / Lat :
+        <input type="text" name="longtitude" id="longtitude" />
+        <input type="text" name="lattitude" id="lattitude" />
+        <input type="text" name="numberOfLocations" id="numberOfLocations" />
+        <button title="Get Logs" class="btn btn-default btn-sm ulbtn" onclick="GetNearestLocations()">
+            <span class="glyphicon glyphicon-search"></span>
+        </button>
+    </div>
+</div>
+
+<div id="divResult" class="center-block">
+</div>
