@@ -23,7 +23,7 @@ namespace Denovu.Web.Controllers
                 var locations = db.Locations.Where(l => l.Longitude != null && l.Latitude != null).ToList();
                 foreach (var loc in locations)
                 {
-                    loc.Distance = DetermineDistance(longtitude, lattitude, loc.Longitude, loc.Latitude);
+                    loc.Distance = DetermineDistance(longtitude, lattitude, loc.Longitude.Value, loc.Latitude.Value);
                 }
                 locations = locations.OrderBy(l => l.Distance).Take(numberOfLocations).ToList();
                 foreach (var loc in locations)
@@ -47,12 +47,10 @@ namespace Denovu.Web.Controllers
             return DetermineRoute(parent) + ">" + parent.Name;
         }
 
-        private double DetermineDistance(double longtitude, double latitude, double? longtitude1, double? latitude1)
+        private double DetermineDistance(double longtitude, double latitude, double longtitude1, double latitude1)
         {
             double distance = 0.0;
-            longtitude1 = longtitude1 ?? 0.0;
-            latitude1 = latitude1 ?? 0.0;
-            distance = Math.Sqrt(Math.Pow(longtitude - longtitude1.Value, 2.0) + Math.Pow(latitude - latitude1.Value, 2.0));
+            distance = Math.Sqrt(Math.Pow(longtitude - longtitude1, 2.0) + Math.Pow(latitude - latitude1, 2.0));
             return distance;
         }
     }
